@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,6 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Checkout CMS data
+        uses: actions/checkout@v4
+        with:
+          repository: agentic-dev-io/cms
+          path: ../cms
 
       - name: Setup Node
         uses: actions/setup-node@v4
