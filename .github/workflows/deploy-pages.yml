@@ -21,10 +21,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Checkout CMS data
-        uses: actions/checkout@v4
-        with:
-          repository: agentic-dev-io/cms
-          path: ../cms
+        run: git clone --depth 1 https://github.com/agentic-dev-io/cms.git ../cms
 
       - name: Setup Node
         uses: actions/setup-node@v4
