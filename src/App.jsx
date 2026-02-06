@@ -11,16 +11,15 @@ import {
   Layers,
   Zap,
   Github,
-  Search
+  Search,
+  Menu,
+  X
 } from 'lucide-react';
 
 import heroData from '@content/hero.json';
 import modesData from '@content/modes.json';
 import statsData from '@content/stats.json';
-import ecosystemData from '@shared/ecosystem.json';
-
 const modeIcons = { Network, Globe, Database };
-const ecosystemIcons = { FlaskConical, Cpu, Layers };
 
 const SpatialBackground = ({ activeMode }) => {
   const mountRef = useRef(null);
@@ -44,13 +43,15 @@ const SpatialBackground = ({ activeMode }) => {
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
       camera.position.z = 900;
 
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const isMobile = window.innerWidth < 768;
+
+      renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0x000000, 0);
       mountRef.current.appendChild(renderer.domElement);
 
-      const count = 400;
+      const count = isMobile ? 150 : 400;
       const geometry = new THREE.BufferGeometry();
       const positions = new Float32Array(count * 3);
       const velocities = new Float32Array(count * 3);
@@ -183,6 +184,7 @@ const SpatialBackground = ({ activeMode }) => {
 const App = () => {
   const [activeMode, setActiveMode] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -203,8 +205,6 @@ const App = () => {
     return { id: i, title: m.title, desc: m.description, icon: IconComponent ? <IconComponent /> : null };
   });
 
-  const currentSiteId = 'synapticore-io';
-
   return (
     <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-cyan-500/40 selection:text-white overflow-x-hidden">
       <SpatialBackground activeMode={activeMode} />
@@ -212,21 +212,21 @@ const App = () => {
       <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(2,6,23,0.4)_100%)]" />
         <div className="absolute top-0 left-0 w-full h-[2px] bg-cyan-500/10 shadow-[0_0_20px_rgba(6,182,212,0.5)] animate-scanline" />
-        <div className="absolute top-10 left-10 w-20 h-20 border-t-2 border-l-2 border-white/10" />
-        <div className="absolute top-10 right-10 w-20 h-20 border-t-2 border-r-2 border-white/10" />
-        <div className="absolute bottom-10 left-10 w-20 h-20 border-b-2 border-l-2 border-white/10" />
-        <div className="absolute bottom-10 right-10 w-20 h-20 border-b-2 border-r-2 border-white/10" />
+        <div className="hidden md:block absolute top-10 left-10 w-20 h-20 border-t-2 border-l-2 border-white/10" />
+        <div className="hidden md:block absolute top-10 right-10 w-20 h-20 border-t-2 border-r-2 border-white/10" />
+        <div className="hidden md:block absolute bottom-10 left-10 w-20 h-20 border-b-2 border-l-2 border-white/10" />
+        <div className="hidden md:block absolute bottom-10 right-10 w-20 h-20 border-b-2 border-r-2 border-white/10" />
       </div>
 
-      <nav className={`fixed w-full z-50 transition-all duration-700 ${scrolled ? 'py-4 backdrop-blur-md border-b border-white/5 bg-slate-950/40' : 'py-10'}`}>
-        <div className="container mx-auto px-8 flex justify-between items-center">
+      <nav className={`fixed w-full z-50 transition-all duration-700 ${scrolled ? 'py-4 backdrop-blur-md border-b border-white/5 bg-slate-950/40' : 'py-6 sm:py-10'}`}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center gap-4 group cursor-pointer">
             <div className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center group-hover:bg-cyan-500 transition-all duration-500">
               <Network size={22} className="group-hover:text-slate-950" />
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-black tracking-tighter leading-none uppercase">SYNAPTICORE<span className="text-cyan-400">.IO</span></span>
-              <span className="text-[9px] text-slate-500 font-mono tracking-[0.4em] uppercase font-bold">Research Platform</span>
+              <span className="text-[9px] text-slate-500 font-mono tracking-[0.4em] uppercase font-bold">Scientific Computing & Spatial Intelligence</span>
             </div>
           </div>
 
@@ -236,32 +236,46 @@ const App = () => {
               Login
             </button>
           </div>
+          <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
         </div>
+
+        {isMenuOpen && (
+          <div className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-white/5 mt-2">
+            <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+              <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">GitHub</a>
+              <button onClick={() => setIsMenuOpen(false)} className="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all hover:border-cyan-500">
+                Login
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       <main className="relative z-20">
         <section className="min-h-screen flex items-center pt-20">
-          <div className="container mx-auto px-8">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-4 bg-cyan-500/10 border border-cyan-500/20 px-6 py-2 rounded-full text-cyan-400 text-[10px] font-black mb-10 tracking-[0.3em] uppercase animate-pulse">
-                <FlaskConical size={14} /> Active Sequence: {modes[activeMode].title}
+              <div className="inline-flex items-center gap-4 bg-cyan-500/10 border border-cyan-500/20 px-4 sm:px-6 py-2 rounded-full text-cyan-400 text-[10px] font-black mb-10 tracking-[0.3em] uppercase animate-pulse">
+                <FlaskConical size={14} /> <span className="hidden sm:inline">Active Sequence:</span> {modes[activeMode].title}
               </div>
 
-              <h1 className="text-7xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] mb-12 uppercase italic">
+              <h1 className="text-4xl sm:text-6xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] mb-8 sm:mb-12 uppercase italic">
                 {heroData.title.split('\n')[0]} <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">{heroData.title.split('\n')[1]}</span>
               </h1>
 
-              <p className="text-xl lg:text-3xl text-slate-400 max-w-2xl font-light leading-relaxed mb-16">
+              <p className="text-lg sm:text-xl lg:text-3xl text-slate-400 max-w-2xl font-light leading-relaxed mb-10 sm:mb-16">
                 {heroData.description.split('\n')[0]} <br />
                 <span className="text-white font-medium italic underline decoration-cyan-500 underline-offset-[12px]">{heroData.description.split('\n')[1]}</span>
               </p>
 
-              <div className="flex flex-wrap gap-8">
-                <button className="px-12 py-6 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-400 transition-all uppercase tracking-widest text-xs flex items-center gap-3">
+              <div className="flex flex-wrap gap-4 sm:gap-8">
+                <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-400 transition-all uppercase tracking-widest text-xs flex items-center gap-3">
                   {heroData.cta_text} <ChevronRight size={18} />
                 </button>
-                <button className="px-12 py-6 bg-white/5 backdrop-blur-md border border-white/10 text-white font-black rounded-2xl hover:border-cyan-500 transition-all uppercase tracking-widest text-xs">
+                <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white/5 backdrop-blur-md border border-white/10 text-white font-black rounded-2xl hover:border-cyan-500 transition-all uppercase tracking-widest text-xs">
                   Labor Protokoll
                 </button>
               </div>
@@ -269,13 +283,13 @@ const App = () => {
           </div>
         </section>
 
-        <section className="py-32 relative">
-          <div className="container mx-auto px-8">
+        <section className="py-16 md:py-32 relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {modes.map((mode) => (
                 <div
                   key={mode.id}
-                  className={`relative p-12 rounded-[2.5rem] border transition-all duration-700 overflow-hidden group ${activeMode === mode.id ? 'border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_40px_rgba(6,182,212,0.1)]' : 'border-white/5 bg-white/5 hover:border-white/20'}`}
+                  className={`relative p-6 sm:p-12 rounded-2xl sm:rounded-[2.5rem] border transition-all duration-700 overflow-hidden group ${activeMode === mode.id ? 'border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_40px_rgba(6,182,212,0.1)]' : 'border-white/5 bg-white/5 hover:border-white/20'}`}
                 >
                   <div className={`absolute top-0 right-0 p-8 transition-all duration-700 opacity-20 ${activeMode === mode.id ? 'scale-150 opacity-100 rotate-12 text-cyan-400' : ''}`}>
                     {mode.icon}
@@ -297,16 +311,16 @@ const App = () => {
           </div>
         </section>
 
-        <section className="py-40 bg-slate-950/40 relative">
-          <div className="container mx-auto px-8">
-            <div className="flex flex-col lg:flex-row gap-24 items-center">
+        <section className="py-16 md:py-40 bg-slate-950/40 relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row gap-12 md:gap-24 items-center">
               <div className="lg:w-1/2">
                 <div className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.5em] mb-8">{statsData.title}</div>
                 <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-10 leading-none">{statsData.metadata.heading.split(' ').slice(0, -1).join(' ')} <br /><span className="text-cyan-400">{statsData.metadata.heading.split(' ').slice(-1)[0]}</span></h2>
                 <p className="text-slate-400 text-lg lg:text-xl font-light leading-relaxed mb-12">
                   {statsData.description}
                 </p>
-                <div className="grid grid-cols-2 gap-12">
+                <div className="grid grid-cols-2 gap-6 md:gap-12">
                   {statsData.metadata.metrics.map((metric, i) => (
                     <div key={i}>
                       <div className="text-3xl font-black mb-1 tracking-tighter italic">{metric.value}</div>
@@ -315,7 +329,7 @@ const App = () => {
                   ))}
                 </div>
               </div>
-              <div className="lg:w-1/2 relative">
+              <div className="lg:w-1/2 relative max-w-[300px] sm:max-w-none mx-auto">
                 <div className="w-full aspect-square border border-white/10 rounded-full flex items-center justify-center relative animate-slow-spin">
                   <div className="w-3/4 h-3/4 border border-cyan-500/20 rounded-full animate-reverse-spin border-dashed" />
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-cyan-500 rounded-full shadow-[0_0_20px_rgba(6,182,212,1)]" />
@@ -327,71 +341,16 @@ const App = () => {
                   </div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center font-mono text-cyan-500/40 text-[10px] uppercase tracking-[1em]">
-                  Researching
+                  Computing
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-32 relative">
-          <div className="container mx-auto px-8">
-            <div className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.5em] mb-8">Ecosystem Protocol</div>
-            <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-6 leading-none">Connected <br /><span className="text-cyan-400">Systems.</span></h2>
-            <p className="text-slate-400 text-lg lg:text-xl font-light leading-relaxed mb-16 max-w-2xl">
-              Das Lab ist der Ursprung. Was hier als Experiment beginnt, wird bei Dev zu agentic Systems – und im Studio zu Content-Produktionen, die die Industrie bewegen.
-            </p>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-              {ecosystemData.map((org, i) => {
-                const isActive = org.org_id === currentSiteId;
-                const IconComponent = ecosystemIcons[org.icon];
-                return (
-                  <div
-                    key={i}
-                    className={`relative p-12 rounded-[2.5rem] border transition-all duration-700 overflow-hidden group ${
-                      isActive
-                        ? 'border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_40px_rgba(6,182,212,0.1)]'
-                        : 'border-white/5 bg-white/5 hover:border-white/20'
-                    }`}
-                  >
-                    {isActive && (
-                      <div className="absolute top-6 right-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-cyan-400">
-                        Active Node <Activity size={12} className="animate-pulse" />
-                      </div>
-                    )}
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 ${
-                      isActive ? 'bg-cyan-500 text-slate-950' : 'bg-white/5 text-slate-400'
-                    }`}>
-                      {IconComponent && <IconComponent size={24} />}
-                    </div>
-                    <div className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-3">{org.role}</div>
-                    <h3 className="text-2xl font-black uppercase tracking-tighter mb-4">{org.name.toUpperCase()}</h3>
-                    <p className="text-slate-500 leading-relaxed font-light text-sm mb-6">{org.description}</p>
-                    {!isActive && org.href && (
-                      <a href={org.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-cyan-400 transition-all">
-                        Connect <ChevronRight size={14} />
-                      </a>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="flex items-center justify-center gap-6 py-6 bg-white/[0.02] border border-white/5 rounded-full">
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400">Lab</span>
-              <div className="w-12 h-[1px] bg-gradient-to-r from-cyan-500 to-transparent" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-400">Dev</span>
-              <div className="w-12 h-[1px] bg-gradient-to-r from-orange-500 to-transparent" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400">Studio</span>
-              <span className="text-[10px] font-mono text-slate-600 tracking-widest ml-4">// Research → Systems → Production</span>
-            </div>
-          </div>
-        </section>
-
-        <footer className="py-24 border-t border-white/5 backdrop-blur-3xl relative z-30">
-          <div className="container mx-auto px-8">
-            <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-24">
+        <footer className="py-12 md:py-24 border-t border-white/5 backdrop-blur-3xl relative z-30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-10 md:gap-16 mb-12 md:mb-24">
               <div className="max-w-md">
                 <span className="text-3xl font-black tracking-tighter uppercase mb-8 block">Synapticore<span className="text-cyan-500">.io</span></span>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">
@@ -418,9 +377,9 @@ const App = () => {
             <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
               <div className="flex items-center gap-4">
                 <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-                <span className="text-[10px] font-mono text-slate-600 tracking-[0.2em] uppercase">Status: Core Systems Operational // Ver 0.4.8_A</span>
+                <span className="text-[10px] font-mono text-slate-600 tracking-[0.2em] uppercase">Status: Core Systems Operational</span>
               </div>
-              <span className="text-[10px] font-mono text-slate-700 uppercase tracking-widest">© 2026 Synapticore Lab Research Unit</span>
+              <span className="text-[10px] font-mono text-slate-700 uppercase tracking-widest">© 2026 Synapticore.io</span>
             </div>
           </div>
         </footer>
