@@ -3,6 +3,7 @@ import {
   Cpu,
   Globe,
   Network,
+  Database,
   ChevronRight,
   Terminal,
   Activity,
@@ -10,8 +11,7 @@ import {
   Layers,
   Zap,
   Github,
-  Search,
-  Box
+  Search
 } from 'lucide-react';
 
 import heroData from '@content/hero.json';
@@ -19,7 +19,7 @@ import modesData from '@content/modes.json';
 import statsData from '@content/stats.json';
 import ecosystemData from '@shared/ecosystem.json';
 
-const modeIcons = { Network, Box, Globe };
+const modeIcons = { Network, Globe, Database };
 const ecosystemIcons = { FlaskConical, Cpu, Layers };
 
 const SpatialBackground = ({ activeMode }) => {
@@ -395,7 +395,7 @@ const App = () => {
               <div className="max-w-md">
                 <span className="text-3xl font-black tracking-tighter uppercase mb-8 block">Synapticore<span className="text-cyan-500">.io</span></span>
                 <p className="text-slate-500 text-sm leading-relaxed mb-8">
-                  Ein Open-Science-Laboratorium zur Erforschung der Grenzen von physischer und digitaler Intelligenz.
+                  Open-Source-Forschung in Neural Computing, astronomischer Datenanalyse und Scientific Data Engineering.
                 </p>
                 <div className="flex gap-6">
                   <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition-all duration-300" aria-label="GitHub">
@@ -406,21 +406,13 @@ const App = () => {
                   </a>
                 </div>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                <div className="flex flex-col gap-6">
-                  <span className="text-[10px] font-black uppercase text-white tracking-[0.3em]">Connect</span>
-                  <ul className="text-slate-500 text-xs space-y-4 font-mono uppercase tracking-widest">
-                    <li><a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400">GitHub</a></li>
-                    <li><a href="/impressum.html" className="hover:text-cyan-400">Impressum</a></li>
-                    <li><a href="/impressum.html#datenschutz" className="hover:text-cyan-400">Datenschutz</a></li>
-                  </ul>
-                </div>
-                <div className="flex flex-col gap-6">
-                  <span className="text-[10px] font-black uppercase text-white tracking-[0.3em]">Systems</span>
-                  <ul className="text-slate-500 text-xs space-y-4 font-mono uppercase tracking-widest">
-                    <li className="text-slate-600">Coming soon</li>
-                  </ul>
-                </div>
+              <div className="flex flex-col gap-6">
+                <span className="text-[10px] font-black uppercase text-white tracking-[0.3em]">Connect</span>
+                <ul className="text-slate-500 text-xs space-y-4 font-mono uppercase tracking-widest">
+                  <li><a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400">GitHub</a></li>
+                  <li><a href="/impressum.html" className="hover:text-cyan-400">Impressum</a></li>
+                  <li><a href="/impressum.html#datenschutz" className="hover:text-cyan-400">Datenschutz</a></li>
+                </ul>
               </div>
             </div>
             <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
