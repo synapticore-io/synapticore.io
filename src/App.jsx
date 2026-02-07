@@ -14,7 +14,8 @@ import {
   Search,
   Menu,
   X,
-  ExternalLink
+  ExternalLink,
+  Mail
 } from 'lucide-react';
 
 import heroData from '@content/hero.json';
@@ -232,6 +233,7 @@ const App = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-12">
+            <a href="#contact" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Kontakt</a>
             <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">GitHub</a>
           </div>
           <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -242,6 +244,7 @@ const App = () => {
         {isMenuOpen && (
           <div className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-white/5 mt-2">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">Kontakt</a>
               <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">GitHub</a>
             </div>
           </div>
@@ -351,38 +354,33 @@ const App = () => {
           </div>
         </section>
 
-        <footer className="py-12 md:py-24 border-t border-white/5 backdrop-blur-3xl relative z-30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row justify-between items-start gap-10 md:gap-16 mb-12 md:mb-24">
-              <div className="max-w-md">
-                <span className="text-3xl font-black tracking-tighter uppercase mb-8 block">Synapticore<span className="text-cyan-500">.io</span></span>
-                <p className="text-slate-500 text-sm leading-relaxed mb-8">
-                  Open-Source-Forschung in Neural Computing, astronomischer Datenanalyse und Scientific Data Engineering.
-                </p>
-                <div className="flex gap-6">
-                  <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition-all duration-300" aria-label="GitHub">
-                    <Github size={20} />
-                  </a>
-                  <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition-all duration-300" aria-label="Terminal / Repos">
-                    <Terminal size={20} />
-                  </a>
-                </div>
-              </div>
-              <div className="flex flex-col gap-6">
-                <span className="text-[10px] font-black uppercase text-white tracking-[0.3em]">Connect</span>
-                <ul className="text-slate-500 text-xs space-y-4 font-mono uppercase tracking-widest">
-                  <li><a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400">GitHub</a></li>
-                  <li><a href="/impressum.html" className="hover:text-cyan-400">Impressum</a></li>
-                  <li><a href="/impressum.html#datenschutz" className="hover:text-cyan-400">Datenschutz</a></li>
-                </ul>
-              </div>
+        <section id="contact" className="py-16 md:py-32 relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">
+              Get in <span className="text-cyan-400">Touch.</span>
+            </h2>
+            <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto font-light">
+              Fragen zu unserer Forschung, Interesse an Zusammenarbeit oder Open-Source-Beiträge?
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+              <a href="mailto:hello@synapticore.io" className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 hover:border-cyan-500 rounded-full text-white font-bold text-sm uppercase tracking-widest transition-all">
+                <Mail size={16} /> hello@synapticore.io
+              </a>
+              <a href="https://www.linkedin.com/in/bj%C3%B6rn-bethge-a0754a329" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-500 hover:text-cyan-400 transition-colors font-bold uppercase tracking-widest">
+                LinkedIn
+              </a>
             </div>
-            <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-                <span className="text-[10px] font-mono text-slate-600 tracking-[0.2em] uppercase">Status: Core Systems Operational</span>
-              </div>
-              <span className="text-[10px] font-mono text-slate-700 uppercase tracking-widest">© 2026 Synapticore.io</span>
+          </div>
+        </section>
+
+        <footer className="py-8 border-t border-white/5 relative z-30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <span className="text-[10px] font-mono text-slate-700 uppercase tracking-widest">© 2026 Synapticore.io</span>
+            <div className="flex flex-wrap justify-center gap-8 text-[10px] font-mono uppercase tracking-widest text-slate-600">
+              <a href="mailto:hello@synapticore.io" className="hover:text-cyan-400 transition-colors">Kontakt</a>
+              <a href="https://www.linkedin.com/in/bj%C3%B6rn-bethge-a0754a329" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">LinkedIn</a>
+              <a href="/impressum.html" className="hover:text-cyan-400 transition-colors">Impressum</a>
+              <a href="/impressum.html#datenschutz" className="hover:text-cyan-400 transition-colors">Datenschutz</a>
             </div>
           </div>
         </footer>
