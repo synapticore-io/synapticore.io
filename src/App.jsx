@@ -270,18 +270,18 @@ const App = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 sm:gap-8">
-                <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-400 transition-all uppercase tracking-widest text-xs flex items-center gap-3">
+                <a href="#research" className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-400 transition-all uppercase tracking-widest text-xs flex items-center gap-3">
                   {heroData.cta_text} <ChevronRight size={18} />
-                </button>
-                <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white/5 backdrop-blur-md border border-white/10 text-white font-black rounded-2xl hover:border-cyan-500 transition-all uppercase tracking-widest text-xs">
-                  Labor Protokoll
-                </button>
+                </a>
+                <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="px-6 py-4 sm:px-12 sm:py-6 bg-white/5 backdrop-blur-md border border-white/10 text-white font-black rounded-2xl hover:border-cyan-500 transition-all uppercase tracking-widest text-xs no-underline">
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16 md:py-32 relative">
+        <section id="research" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {modes.map((mode) => (
