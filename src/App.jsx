@@ -232,9 +232,6 @@ const App = () => {
 
           <div className="hidden lg:flex items-center gap-12">
             <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">GitHub</a>
-            <button className="bg-white/5 border border-white/10 hover:border-cyan-500 text-white px-8 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all">
-              Login
-            </button>
           </div>
           <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X /> : <Menu />}
@@ -245,9 +242,6 @@ const App = () => {
           <div className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-white/5 mt-2">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">GitHub</a>
-              <button onClick={() => setIsMenuOpen(false)} className="bg-white/5 border border-white/10 text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all hover:border-cyan-500">
-                Login
-              </button>
             </div>
           </div>
         )}
