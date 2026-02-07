@@ -13,7 +13,8 @@ import {
   Github,
   Search,
   Menu,
-  X
+  X,
+  ExternalLink
 } from 'lucide-react';
 
 import heroData from '@content/hero.json';
@@ -322,6 +323,14 @@ const App = () => {
                     </div>
                   ))}
                 </div>
+                <a
+                  href="https://github.com/orgs/synapticore-io/repositories?type=public"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-8 text-xs font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-cyan-400 transition-all"
+                >
+                  Repositories erkunden <ExternalLink size={12} />
+                </a>
               </div>
               <div className="lg:w-1/2 relative max-w-[300px] sm:max-w-none mx-auto">
                 <div className="w-full aspect-square border border-white/10 rounded-full flex items-center justify-center relative animate-slow-spin">
