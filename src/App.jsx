@@ -324,7 +324,7 @@ const App = () => {
                   ))}
                 </div>
                 <a
-                  href="https://github.com/orgs/synapticore-io/repositories?type=source"
+                  href="https://github.com/orgs/synapticore-io/repositories?q=mirror%3Afalse+fork%3Afalse+archived%3Afalse"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-8 text-xs font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-cyan-400 transition-all"
