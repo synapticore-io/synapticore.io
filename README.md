@@ -1,5 +1,7 @@
 # synapticore.io
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N71WOHZ3)
+
 **Scientific Computing & Spatial Intelligence**
 
 [\![Live](https://img.shields.io/badge/synapticore.io-live-blue?style=flat-square)](https://synapticore.io)
@@ -22,4 +24,3 @@ npm run preview  # Preview build on port 4173
 ## License
 
 [MIT Ethical Use](LICENSE)
-
