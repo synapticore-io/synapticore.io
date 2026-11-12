@@ -261,12 +261,11 @@ const App = () => {
 
               <h1 className="text-4xl sm:text-6xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] mb-8 sm:mb-12 uppercase italic">
                 {heroData.title.split('\n')[0]} <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">{heroData.title.split('\n')[1]}</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">{heroData.title.split('\n')[1]}</span>
               </h1>
 
               <p className="text-lg sm:text-xl lg:text-3xl text-slate-400 max-w-2xl font-light leading-relaxed mb-10 sm:mb-16">
-                {heroData.description.split('\n')[0]} <br />
-                <span className="text-white font-medium italic underline decoration-cyan-500 underline-offset-[12px]">{heroData.description.split('\n')[1]}</span>
+                {heroData.description}
               </p>
 
               <div className="flex flex-wrap gap-4 sm:gap-8">
