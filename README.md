@@ -25,6 +25,8 @@ Hero-Texte werden im CMS in `hero_sections`, Forschungsfelder und Arbeitsweise i
 
 - Die bisherige Umsatzsteuer-ID kann laut Auskunft des Finanzamts reaktiviert werden; Abschluss und Gültigkeit der Reaktivierung noch bestätigen.
 
+Die gemeinsame technische AI-Act-Sichtung und die Prüfanlässe stehen im Repository `agentic-dev.io` unter `docs/ai-act-website-sichtung.md`.
+
 ## License
 
 [MIT Ethical Use](LICENSE)
