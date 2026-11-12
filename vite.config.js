@@ -11,4 +11,12 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../cms/data/shared'),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        en: path.resolve(__dirname, 'en/index.html'),
+      },
+    },
+  },
 });

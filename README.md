@@ -19,6 +19,8 @@ npm run build    # Production build → dist/
 npm run preview  # Preview build on port 4173
 ```
 
+Die deutsche Startseite liegt unter `/`, die englische Fassung unter `/en/`. Die englischen Website-Texte stehen in `src/App.jsx`; Die englische Rechtstext-Übersetzung liegt unter `/en/impressum.html`; die deutsche Fassung bleibt maßgeblich.
+
 Hero-Texte werden im CMS in `hero_sections`, Forschungsfelder und Arbeitsweise in `content_blocks` gepflegt. Export: `uv run cms export --site synapticore-io` im CMS-Verzeichnis. Die Darstellung des Arbeitsablaufs, die Projektauswahl sowie Über-mich- und Ökosystemtexte stehen in `src/App.jsx`.
 
 ## Offen

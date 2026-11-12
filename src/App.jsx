@@ -192,6 +192,35 @@ const SpatialBackground = ({ activeMode }) => {
 };
 
 const App = () => {
+  const isEnglish = window.location.pathname === '/en' || window.location.pathname.startsWith('/en/');
+  const [languageHash, setLanguageHash] = useState(() => window.location.hash);
+  useEffect(() => {
+    const updateHash = () => setLanguageHash(window.location.hash);
+    window.addEventListener('hashchange', updateHash);
+    return () => window.removeEventListener('hashchange', updateHash);
+  }, []);
+  const hero = isEnglish ? {
+    ...heroData,
+    description: 'I help research and development teams turn data and prototypes into useful systems, with data pipelines, physics-based models and traceable results.',
+    cta_text: 'Discuss your project',
+  } : heroData;
+  const stats = isEnglish ? {
+    ...statsData,
+    description: 'You have data, a research question or a working prototype. I help turn it into a traceable workflow and a tool for practical use.',
+    metadata: { ...statsData.metadata, heading: 'From question to deployment.' },
+  } : statsData;
+  const englishModes = {
+    'sio-mode-1': { title: 'Data pipelines', description: 'Bring measurement, materials and research data together, prepare it and make it accessible for analysis and models.' },
+    'sio-mode-2': { title: 'Models & simulation', description: 'Investigate physical relationships using simulation and machine learning, from research question to prototype.' },
+    'sio-mode-3': { title: 'From lab to production', description: 'Develop prototypes into useful software and document results, assumptions and limitations for review and audit.' },
+  };
+  const englishProjects = {
+    'astro-duck': { category: 'Astronomy · DuckDB', description: 'A DuckDB community extension for astronomical data: read FITS files, transform coordinates and explore celestial objects directly in SQL.' },
+    'astro-lab': { category: 'Astronomy · Machine Learning', description: 'A research lab for the cosmic web: astronomical catalogues, graph neural networks and interactive 3D views help investigate spatial structures.' },
+    'marimo-flow': { category: 'Models · Experiments', description: 'An agent team builds and trains physics-informed neural networks for differential equations. MLflow and DuckDB record experiments and work steps.' },
+    'dust-analyzer': { category: 'Environmental data · Analysis', description: 'Access Copernicus CAMS data on Saharan dust, SO₂ and particulate matter as maps and time series, via a CLI and an MCP server.' },
+  };
+  const displayProjects = isEnglish ? projects.map((project) => ({ ...project, ...(englishProjects[project.name] ?? { category: 'Research software', description: 'English description coming soon.' }) })) : projects;
   const [activeMode, setActiveMode] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -212,7 +241,7 @@ const App = () => {
 
   const modes = modesData.map((m, i) => {
     const IconComponent = modeIcons[m.icon];
-    return { id: i, title: m.title, desc: m.description, icon: IconComponent ? <IconComponent /> : null };
+    return { id: i, title: isEnglish ? (englishModes[m.block_id]?.title ?? 'Translation pending') : m.title, desc: isEnglish ? (englishModes[m.block_id]?.description ?? 'English description coming soon.') : m.description, icon: IconComponent ? <IconComponent /> : null };
   });
 
   return (
@@ -241,22 +270,26 @@ const App = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-12">
-            <a href="#research" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Leistungen</a>
-            <a href="#projects" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Projekte</a>
-            <a href="#contact" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Kontakt</a>
+            <a href="#research" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">{isEnglish ? 'Services' : 'Leistungen'}</a>
+            <a href="#projects" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">{isEnglish ? 'Projects' : 'Projekte'}</a>
+            <a href="#contact" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">{isEnglish ? 'Contact' : 'Kontakt'}</a>
             <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">GitHub</a>
+            <a href={(isEnglish ? '/' : '/en/') + languageHash} lang={isEnglish ? 'de' : 'en'} aria-label={isEnglish ? 'Zur deutschen Version wechseln' : 'Switch to English'} className="text-[10px] font-bold text-cyan-400 hover:text-white uppercase tracking-widest">{isEnglish ? 'DE' : 'EN'}</a>
           </div>
-          <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
+          <div className="lg:hidden flex shrink-0 items-center gap-3">
+            <a href={(isEnglish ? '/' : '/en/') + languageHash} lang={isEnglish ? 'de' : 'en'} aria-label={isEnglish ? 'Zur deutschen Version wechseln' : 'Switch to English'} className="text-[10px] font-bold text-cyan-400 border border-white/20 rounded-full px-2 py-1">{isEnglish ? 'DE' : 'EN'}</a>
+            <button className="text-white" aria-label={isMenuOpen ? (isEnglish ? 'Close menu' : 'Menü schließen') : (isEnglish ? 'Open menu' : 'Menü öffnen')} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
         </div>
 
         {isMenuOpen && (
           <div className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-white/5 mt-2">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              <a href="#research" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">Leistungen</a>
-              <a href="#projects" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">Projekte</a>
-              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">Kontakt</a>
+              <a href="#research" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">{isEnglish ? 'Services' : 'Leistungen'}</a>
+              <a href="#projects" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">{isEnglish ? 'Projects' : 'Projekte'}</a>
+              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">{isEnglish ? 'Contact' : 'Kontakt'}</a>
               <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">GitHub</a>
             </div>
           </div>
@@ -272,17 +305,17 @@ const App = () => {
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] mb-8 sm:mb-12 uppercase italic">
-                {heroData.title.split('\n')[0]} <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">{heroData.title.split('\n')[1]}</span>
+                {hero.title.split('\n')[0]} <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">{hero.title.split('\n')[1]}</span>
               </h1>
 
               <p className="text-lg sm:text-xl lg:text-3xl text-slate-400 max-w-2xl font-light leading-relaxed mb-10 sm:mb-16">
-                {heroData.description}
+                {hero.description}
               </p>
 
               <div className="flex flex-wrap gap-4 sm:gap-8">
                 <a href="#contact" className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-400 transition-all uppercase tracking-widest text-xs flex items-center gap-3">
-                  {heroData.cta_text} <ChevronRight size={18} />
+                  {hero.cta_text} <ChevronRight size={18} />
                 </a>
                 <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="px-6 py-4 sm:px-12 sm:py-6 bg-white/5 backdrop-blur-md border border-white/10 text-white font-black rounded-2xl hover:border-cyan-500 transition-all uppercase tracking-widest text-xs no-underline">
                   GitHub
@@ -296,16 +329,16 @@ const App = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row gap-12 md:gap-24 items-center">
               <div className="lg:w-1/2">
-                <div className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.5em] mb-8">{statsData.title}</div>
-                <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-10 leading-none">{statsData.metadata.heading.split(' ').slice(0, -1).join(' ')} <br /><span className="text-cyan-400">{statsData.metadata.heading.split(' ').slice(-1)[0]}</span></h2>
+                <div className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.5em] mb-8">{stats.title}</div>
+                <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-10 leading-none">{stats.metadata.heading.split(' ').slice(0, -1).join(' ')} <br /><span className="text-cyan-400">{stats.metadata.heading.split(' ').slice(-1)[0]}</span></h2>
                 <p className="text-slate-400 text-lg lg:text-xl font-light leading-relaxed mb-12">
-                  {statsData.description}
+                  {stats.description}
                 </p>
                 <ol className="space-y-5 text-slate-400 leading-relaxed">
-                  <li><strong className="text-white">01 · Verstehen:</strong> Fragestellung, Daten und Anforderungen klären.</li>
-                  <li><strong className="text-white">02 · Entwickeln:</strong> Datenpipeline und Modell oder Prototyp aufbauen.</li>
-                  <li><strong className="text-white">03 · Prüfen:</strong> Ergebnisse gegen vereinbarte Kriterien evaluieren und Grenzen dokumentieren.</li>
-                  <li><strong className="text-white">04 · Einsetzen:</strong> Den Prototyp für den vorgesehenen Betrieb weiterentwickeln und übergeben.</li>
+                  <li><strong className="text-white">{isEnglish ? '01 · Understand:' : '01 · Verstehen:'}</strong> {isEnglish ? 'Clarify the question, data and requirements.' : 'Fragestellung, Daten und Anforderungen klären.'}</li>
+                  <li><strong className="text-white">{isEnglish ? '02 · Develop:' : '02 · Entwickeln:'}</strong> {isEnglish ? 'Build the data pipeline and a model or prototype.' : 'Datenpipeline und Modell oder Prototyp aufbauen.'}</li>
+                  <li><strong className="text-white">{isEnglish ? '03 · Evaluate:' : '03 · Prüfen:'}</strong> {isEnglish ? 'Evaluate results against agreed criteria and document limitations.' : 'Ergebnisse gegen vereinbarte Kriterien evaluieren und Grenzen dokumentieren.'}</li>
+                  <li><strong className="text-white">{isEnglish ? '04 · Deploy:' : '04 · Einsetzen:'}</strong> {isEnglish ? 'Develop the prototype for its intended use and hand it over.' : 'Den Prototyp für den vorgesehenen Betrieb weiterentwickeln und übergeben.'}</li>
                 </ol>
                 <a
                   href="https://github.com/orgs/synapticore-io/repositories?q=mirror%3Afalse+fork%3Afalse+archived%3Afalse"
@@ -313,7 +346,7 @@ const App = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-8 text-xs font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-cyan-400 transition-all"
                 >
-                  Repositories erkunden <ExternalLink size={12} />
+                  {isEnglish ? 'Explore repositories' : 'Repositories erkunden'} <ExternalLink size={12} />
                 </a>
               </div>
               <div className="lg:w-1/2 relative max-w-[300px] sm:max-w-none mx-auto">
@@ -337,9 +370,9 @@ const App = () => {
 
         <section id="research" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Meine Leistungen</p>
-            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Was Ihr Vorhaben <span className="text-cyan-400">weiterbringt.</span></h2>
-            <p className="text-slate-400 text-lg max-w-3xl mb-12">Für Forschungsgruppen, Entwicklungsabteilungen und Unternehmen: vom ersten Datensatz bis zur Weiterentwicklung eines Prototyps für den Einsatz.</p>
+            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">{isEnglish ? 'Services' : 'Meine Leistungen'}</p>
+            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">{isEnglish ? 'Move your work ' : 'Was Ihr Vorhaben '}<span className="text-cyan-400">{isEnglish ? 'forward.' : 'weiterbringt.'}</span></h2>
+            <p className="text-slate-400 text-lg max-w-3xl mb-12">{isEnglish ? 'For research groups, development teams and businesses: from the first dataset to developing a prototype for use.' : 'Für Forschungsgruppen, Entwicklungsabteilungen und Unternehmen: vom ersten Datensatz bis zur Weiterentwicklung eines Prototyps für den Einsatz.'}</p>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {modes.map((mode) => (
                 <div
@@ -368,11 +401,11 @@ const App = () => {
 
         <section id="projects" className="py-16 md:py-32 relative border-t border-white/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ausgewählte Projekte</p>
-            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Forschung in <span className="text-cyan-400">Code.</span></h2>
-            <p className="text-slate-400 text-lg max-w-2xl mb-12">Vier Projekte zeigen, wie aus wissenschaftlichen Daten, Modellen und Fragen konkrete Werkzeuge werden.</p>
+            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">{isEnglish ? 'Selected projects' : 'Ausgewählte Projekte'}</p>
+            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">{isEnglish ? 'Research in ' : 'Forschung in '}<span className="text-cyan-400">Code.</span></h2>
+            <p className="text-slate-400 text-lg max-w-2xl mb-12">{isEnglish ? 'Four projects show how scientific data, models and questions become useful tools.' : 'Vier Projekte zeigen, wie aus wissenschaftlichen Daten, Modellen und Fragen konkrete Werkzeuge werden.'}</p>
             <div className="grid md:grid-cols-2 gap-5">
-              {projects.map((project) => (
+              {displayProjects.map((project) => (
                 <a key={project.name} href={project.url} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:p-9 hover:border-cyan-500/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400">
                   <span className="text-xs text-cyan-400 font-mono uppercase tracking-wider">{project.category} · Open Source</span>
                   <h3 className="text-2xl sm:text-3xl font-bold mt-4 mb-3 flex items-center gap-3">{project.name}<ExternalLink size={17} className="text-slate-500 group-hover:text-cyan-400" /></h3>
@@ -386,21 +419,21 @@ const App = () => {
         <section id="about" className="py-16 md:py-32 relative border-t border-white/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-24">
             <div>
-              <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Über mich</p>
-              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Zusammenhänge erkennen. <span className="text-cyan-400">Systeme entwickeln.</span></h2>
+              <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">{isEnglish ? 'About me' : 'Über mich'}</p>
+              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">{isEnglish ? 'See connections. ' : 'Zusammenhänge erkennen. '}<span className="text-cyan-400">{isEnglish ? 'Build systems.' : 'Systeme entwickeln.'}</span></h2>
               <div className="space-y-5 text-slate-400 text-lg leading-relaxed">
-                <p>Ich bin Björn Bethge, unabhängiger Entwickler und Research Engineer. Ich arbeite mich tief in technische Fragestellungen ein, erkenne Verbindungen zwischen unterschiedlichen Bereichen und entwickle daraus Software, Werkzeuge und Prototypen.</p>
-                <p>Mein Hintergrund liegt in virtueller Absicherung, Visualisierung und interaktiven Systemen an der Schnittstelle von Forschung, Entwicklung und Design. Ich habe mit physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Über Augmented Reality kam ich um 2014 erstmals mit Computer Vision und Machine Learning in Kontakt.</p>
-                <p>Heute verbinde ich diese Erfahrung mit AI, wissenschaftlichem Computing und Software Engineering. Mich interessiert besonders, wie Daten, Geometrie, Bewegung und Simulation in intelligenten Systemen zusammenkommen. In dieser Richtung entwickle ich eigene Ansätze und Prototypen und möchte meine Arbeit zu Spatial und Embodied AI weiter vertiefen.</p>
+                <p>{isEnglish ? 'I am Björn Bethge, an independent developer and research engineer. I explore technical questions in depth, connect different disciplines and turn those insights into software, tools and prototypes.' : 'Ich bin Björn Bethge, unabhängiger Entwickler und Research Engineer. Ich arbeite mich tief in technische Fragestellungen ein, erkenne Verbindungen zwischen unterschiedlichen Bereichen und entwickle daraus Software, Werkzeuge und Prototypen.'}</p>
+                <p>{isEnglish ? 'My background includes virtual validation, visualisation and interactive systems at the intersection of research, development and design. I have worked with physically based rendering, built GPU clusters and introduced laboratory technology to specialist teams. Through augmented reality, I first encountered computer vision and machine learning around 2014.' : 'Mein Hintergrund liegt in virtueller Absicherung, Visualisierung und interaktiven Systemen an der Schnittstelle von Forschung, Entwicklung und Design. Ich habe mit physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Über Augmented Reality kam ich um 2014 erstmals mit Computer Vision und Machine Learning in Kontakt.'}</p>
+                <p>{isEnglish ? 'Today I combine this experience with AI, scientific computing and software engineering. I am particularly interested in bringing data, geometry, motion and simulation together in intelligent systems. I develop my own approaches and prototypes and intend to deepen my work in spatial and embodied AI.' : 'Heute verbinde ich diese Erfahrung mit AI, wissenschaftlichem Computing und Software Engineering. Mich interessiert besonders, wie Daten, Geometrie, Bewegung und Simulation in intelligenten Systemen zusammenkommen. In dieser Richtung entwickle ich eigene Ansätze und Prototypen und möchte meine Arbeit zu Spatial und Embodied AI weiter vertiefen.'}</p>
               </div>
             </div>
             <div>
-              <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ein Ökosystem</p>
-              <h3 className="text-2xl font-bold mb-5">Drei Perspektiven, verbunden.</h3>
+              <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">{isEnglish ? 'An ecosystem' : 'Ein Ökosystem'}</p>
+              <h3 className="text-2xl font-bold mb-5">{isEnglish ? 'Three perspectives, connected.' : 'Drei Perspektiven, verbunden.'}</h3>
               <div className="space-y-5 text-slate-400 leading-relaxed">
-                <p><strong className="text-white">synapticore.io</strong> · Research Engineering und räumliche Intelligenz.</p>
-                <p><a href="https://agentic-dev.io/" className="text-white underline decoration-cyan-500 underline-offset-4">agentic-dev.io</a> · Consulting, Engineering und Education für Agentensysteme.</p>
-                <p><a href="https://synapticore.studio/" className="text-white underline decoration-cyan-500 underline-offset-4">synapticore.studio</a> · DCC-Pipelines und interaktive räumliche Anwendungen.</p>
+                <p><strong className="text-white">synapticore.io</strong>{isEnglish ? ' · Research engineering and spatial intelligence.' : ' · Research Engineering und räumliche Intelligenz.'}</p>
+                <p><a href={isEnglish ? 'https://agentic-dev.io/en/' : 'https://agentic-dev.io/'} className="text-white underline decoration-cyan-500 underline-offset-4">agentic-dev.io</a>{isEnglish ? ' · Consulting, engineering and education for agentic systems.' : ' · Consulting, Engineering und Education für Agentensysteme.'}</p>
+                <p><a href={isEnglish ? 'https://synapticore.studio/en/' : 'https://synapticore.studio/'} className="text-white underline decoration-cyan-500 underline-offset-4">synapticore.studio</a>{isEnglish ? ' · DCC pipelines and interactive spatial applications.' : ' · DCC-Pipelines und interaktive räumliche Anwendungen.'}</p>
               </div>
             </div>
           </div>
@@ -409,10 +442,10 @@ const App = () => {
         <section id="contact" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">
-              Lassen Sie uns <span className="text-cyan-400">sprechen.</span>
+              {isEnglish ? 'Let’s ' : 'Lassen Sie uns '}<span className="text-cyan-400">{isEnglish ? 'talk.' : 'sprechen.'}</span>
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto font-light">
-              Sie haben einen Prototyp, Messdaten oder eine Forschungsfrage und suchen Unterstützung für den nächsten Schritt? Schreiben Sie mir, worum es geht.
+              {isEnglish ? 'Do you have a prototype, measurement data or a research question and need support with the next step? Tell me what you are working on.' : 'Sie haben einen Prototyp, Messdaten oder eine Forschungsfrage und suchen Unterstützung für den nächsten Schritt? Schreiben Sie mir, worum es geht.'}
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               <a href="mailto:hello@synapticore.io" className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 hover:border-cyan-500 rounded-full text-white font-bold text-sm uppercase tracking-widest transition-all">
@@ -429,10 +462,16 @@ const App = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <span className="text-[10px] font-mono text-slate-700 uppercase tracking-widest">© 2026 Synapticore.io</span>
             <div className="flex flex-wrap justify-center gap-8 text-[10px] font-mono uppercase tracking-widest text-slate-600">
-              <a href="mailto:hello@synapticore.io" className="hover:text-cyan-400 transition-colors">Kontakt</a>
+              <a href="mailto:hello@synapticore.io" className="hover:text-cyan-400 transition-colors">{isEnglish ? 'Contact' : 'Kontakt'}</a>
               <a href="https://www.linkedin.com/in/bj%C3%B6rn-bethge-a0754a329" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">LinkedIn</a>
-              <a href="/impressum.html" className="hover:text-cyan-400 transition-colors">Impressum</a>
-              <a href="/impressum.html#datenschutz" className="hover:text-cyan-400 transition-colors">Datenschutz</a>
+              {isEnglish ? (
+                <a href="/en/impressum.html" className="hover:text-cyan-400 transition-colors">Legal notice &amp; privacy</a>
+              ) : (
+                <>
+                  <a href="/impressum.html" className="hover:text-cyan-400 transition-colors">Impressum</a>
+                  <a href="/impressum.html#datenschutz" className="hover:text-cyan-400 transition-colors">Datenschutz</a>
+                </>
+              )}
             </div>
           </div>
         </footer>
