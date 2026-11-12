@@ -388,7 +388,7 @@ const App = () => {
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Über mich</p>
               <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Vom Bild zum <span className="text-cyan-400">Modell.</span></h2>
-              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge. Seit über 20 Jahren beschäftige ich mich mit 3D, Visualisierung und räumlichen Systemen – unter anderem im Umfeld industrieller Forschung und Entwicklung. Ich habe mit virtuellen Materialien und physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Heute nutze ich diese Erfahrung, um Daten und Modelle für Forschung und Fertigung nutzbar zu machen.</p>
+              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge, Founder &amp; Research Engineer bei synapticore.io. Seit über 20 Jahren beschäftige ich mich mit 3D, Visualisierung und räumlichen Systemen – unter anderem im Umfeld industrieller Forschung und Entwicklung. Ich habe mit virtuellen Materialien und physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Heute nutze ich diese Erfahrung, um Daten und Modelle für Forschung und Fertigung nutzbar zu machen.</p>
             </div>
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ein Ökosystem</p>
