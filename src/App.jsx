@@ -20,10 +20,10 @@ import {
 
 
 const projects = [
-  { name: 'astro-duck', category: 'Astronomie · DuckDB', description: 'Astronomische Berechnungen direkt in SQL: von Koordinaten über Extinktion bis zu räumlichen Sektoren.', url: 'https://github.com/synapticore-io/astro-duck' },
-  { name: 'astro-lab', category: 'Astronomie · Machine Learning', description: 'Ein Framework für astronomisches Machine Learning, Datenanalyse und interaktive 3D-Visualisierung.', url: 'https://github.com/synapticore-io/astro-lab' },
-  { name: 'marimo-flow', category: 'Modelle · Experimente', description: 'Agenten unterstützen physik-informierte Machine-Learning-Workflows mit Experimentverfolgung und interaktiven Notebooks.', url: 'https://github.com/synapticore-io/marimo-flow' },
-  { name: 'dust-analyzer', category: 'Umweltdaten · Analyse', description: 'Luftqualitätsdaten aus Copernicus-CAMS als interaktive Analysen und Schnittstelle für KI-Anwendungen.', url: 'https://github.com/synapticore-io/dust-analyzer' },
+  { name: 'astro-duck', category: 'Astronomie · DuckDB', description: 'Eine DuckDB Community Extension für astronomische Daten: FITS-Dateien einlesen, Koordinaten umrechnen und Himmelsobjekte direkt mit SQL untersuchen.', url: 'https://github.com/synapticore-io/astro-duck' },
+  { name: 'astro-lab', category: 'Astronomie · Machine Learning', description: 'Ein Forschungslabor für das kosmische Netz: Astronomische Kataloge, Graph Neural Networks und interaktive 3D-Ansichten helfen, räumliche Strukturen zu untersuchen.', url: 'https://github.com/synapticore-io/astro-lab' },
+  { name: 'marimo-flow', category: 'Modelle · Experimente', description: 'Ein Agententeam erstellt und trainiert physik-informierte neuronale Netze für Differentialgleichungen. MLflow und DuckDB halten Experimente und Arbeitsschritte fest.', url: 'https://github.com/synapticore-io/marimo-flow' },
+  { name: 'dust-analyzer', category: 'Umweltdaten · Analyse', description: 'Copernicus-CAMS-Daten zu Saharastaub, SO₂ und Feinstaub werden als Karten und Zeitreihen zugänglich – über eine CLI und einen MCP-Server.', url: 'https://github.com/synapticore-io/dust-analyzer' },
 ];
 
 import heroData from '@content/hero.json';
@@ -323,8 +323,8 @@ const App = () => {
         <section id="projects" className="py-16 md:py-32 relative border-t border-white/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ausgewählte Projekte</p>
-            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Forschung, die <span className="text-cyan-400">greifbar wird.</span></h2>
-            <p className="text-slate-400 text-lg max-w-2xl mb-12">Von astronomischen Daten bis zu physik-informierten Modellen: offene Projekte, die Fragen in Werkzeuge übersetzen.</p>
+            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Forschung in <span className="text-cyan-400">Code.</span></h2>
+            <p className="text-slate-400 text-lg max-w-2xl mb-12">Vier Projekte zeigen, wie aus wissenschaftlichen Daten, Modellen und Fragen konkrete Werkzeuge werden.</p>
             <div className="grid md:grid-cols-2 gap-5">
               {projects.map((project) => (
                 <a key={project.name} href={project.url} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:p-9 hover:border-cyan-500/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400">
@@ -386,8 +386,8 @@ const App = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-24">
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Über mich</p>
-              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Ein Faden. <span className="text-cyan-400">Viele Perspektiven.</span></h2>
-              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge. Seit über 20 Jahren arbeite ich mit 3D, Visualisierung und räumlichen Systemen. Heute verbinde ich diese Erfahrung mit Scientific Computing und Research Engineering – von Messdaten und Modellen bis zu nutzbarer Software.</p>
+              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Vom Bild zum <span className="text-cyan-400">Modell.</span></h2>
+              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge. Seit über 20 Jahren beschäftige ich mich mit 3D, Visualisierung und räumlichen Systemen – unter anderem im Umfeld industrieller Forschung und Entwicklung. Aus physikbasiertem Rendering und virtuellen Materialien wurde die Frage, wie sich Daten und Modelle für Forschung und Fertigung nutzbar machen lassen.</p>
             </div>
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ein Ökosystem</p>
@@ -407,7 +407,7 @@ const App = () => {
               Get in <span className="text-cyan-400">Touch.</span>
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto font-light">
-              Sie arbeiten mit räumlichen Daten, Modellen oder wissenschaftlichen Werkzeugen? Lassen Sie uns sprechen.
+              Sie arbeiten an einer Forschungsfrage und suchen Unterstützung bei Daten, Modellen oder der Umsetzung? Schreiben Sie mir.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               <a href="mailto:hello@synapticore.io" className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 hover:border-cyan-500 rounded-full text-white font-bold text-sm uppercase tracking-widest transition-all">
