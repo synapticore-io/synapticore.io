@@ -18,6 +18,14 @@ import {
   Mail
 } from 'lucide-react';
 
+
+const projects = [
+  { name: 'astro-duck', category: 'Astronomie · DuckDB', description: 'Astronomische Berechnungen direkt in SQL: von Koordinaten über Extinktion bis zu räumlichen Sektoren.', url: 'https://github.com/synapticore-io/astro-duck' },
+  { name: 'astro-lab', category: 'Astronomie · Machine Learning', description: 'Ein Framework für astronomisches Machine Learning, Datenanalyse und interaktive 3D-Visualisierung.', url: 'https://github.com/synapticore-io/astro-lab' },
+  { name: 'marimo-flow', category: 'Modelle · Experimente', description: 'Agenten unterstützen physik-informierte Machine-Learning-Workflows mit Experimentverfolgung und interaktiven Notebooks.', url: 'https://github.com/synapticore-io/marimo-flow' },
+  { name: 'dust-analyzer', category: 'Umweltdaten · Analyse', description: 'Luftqualitätsdaten aus Copernicus-CAMS als interaktive Analysen und Schnittstelle für KI-Anwendungen.', url: 'https://github.com/synapticore-io/dust-analyzer' },
+];
+
 import heroData from '@content/hero.json';
 import modesData from '@content/modes.json';
 import statsData from '@content/stats.json';
@@ -233,6 +241,8 @@ const App = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-12">
+            <a href="#research" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Forschung</a>
+            <a href="#projects" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Projekte</a>
             <a href="#contact" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Kontakt</a>
             <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">GitHub</a>
           </div>
@@ -244,6 +254,8 @@ const App = () => {
         {isMenuOpen && (
           <div className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-white/5 mt-2">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+              <a href="#research" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">Forschung</a>
+              <a href="#projects" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">Projekte</a>
               <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">Kontakt</a>
               <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">GitHub</a>
             </div>
@@ -256,7 +268,7 @@ const App = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-4 bg-cyan-500/10 border border-cyan-500/20 px-4 sm:px-6 py-2 rounded-full text-cyan-400 text-[10px] font-black mb-10 tracking-[0.3em] uppercase animate-pulse">
-                <FlaskConical size={14} /> <span className="hidden sm:inline">Active Sequence:</span> {modes[activeMode].title}
+                <FlaskConical size={14} /> Research Engineering
               </div>
 
               <h1 className="text-4xl sm:text-6xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] mb-8 sm:mb-12 uppercase italic">
@@ -300,9 +312,26 @@ const App = () => {
                   <p className="text-slate-500 leading-relaxed font-light">{mode.desc}</p>
 
                   <div className={`mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all ${activeMode === mode.id ? 'text-cyan-400 opacity-100' : 'opacity-0'}`}>
-                    System Aktiv <Activity size={12} className="animate-pulse" />
+                    Forschungsfeld <Activity size={12} />
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" className="py-16 md:py-32 relative border-t border-white/5">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ausgewählte Projekte</p>
+            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Forschung, die <span className="text-cyan-400">greifbar wird.</span></h2>
+            <p className="text-slate-400 text-lg max-w-2xl mb-12">Von astronomischen Daten bis zu physik-informierten Modellen: offene Projekte, die Fragen in Werkzeuge übersetzen.</p>
+            <div className="grid md:grid-cols-2 gap-5">
+              {projects.map((project) => (
+                <a key={project.name} href={project.url} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:p-9 hover:border-cyan-500/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400">
+                  <span className="text-xs text-cyan-400 font-mono uppercase tracking-wider">{project.category} · Open Source</span>
+                  <h3 className="text-2xl sm:text-3xl font-bold mt-4 mb-3 flex items-center gap-3">{project.name}<ExternalLink size={17} className="text-slate-500 group-hover:text-cyan-400" /></h3>
+                  <p className="text-slate-400 leading-relaxed">{project.description}</p>
+                </a>
               ))}
             </div>
           </div>
@@ -353,13 +382,32 @@ const App = () => {
           </div>
         </section>
 
+        <section className="py-16 md:py-32 relative border-t border-white/5">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-24">
+            <div>
+              <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Über mich</p>
+              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Ein Faden. <span className="text-cyan-400">Viele Perspektiven.</span></h2>
+              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge. Seit über 20 Jahren arbeite ich mit 3D, Visualisierung und räumlichen Systemen. Heute verbinde ich diese Erfahrung mit Scientific Computing und Research Engineering – von Messdaten und Modellen bis zu nutzbarer Software.</p>
+            </div>
+            <div>
+              <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ein Ökosystem</p>
+              <h3 className="text-2xl font-bold mb-5">Drei Perspektiven, verbunden.</h3>
+              <div className="space-y-5 text-slate-400 leading-relaxed">
+                <p><strong className="text-white">synapticore.io</strong> · Research Engineering und räumliche Intelligenz.</p>
+                <p><a href="https://agentic-dev.io/" className="text-white underline decoration-cyan-500 underline-offset-4">agentic-dev.io</a> · Agentensysteme und AI Development.</p>
+                <p><a href="https://synapticore.studio/" className="text-white underline decoration-cyan-500 underline-offset-4">synapticore.studio</a> · Echtzeit-3D und interaktive Erlebnisse.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="contact" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">
               Get in <span className="text-cyan-400">Touch.</span>
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto font-light">
-              Fragen zu unserer Forschung, Interesse an Zusammenarbeit oder Open-Source-Beiträge?
+              Sie arbeiten mit räumlichen Daten, Modellen oder wissenschaftlichen Werkzeugen? Lassen Sie uns sprechen.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               <a href="mailto:hello@synapticore.io" className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 hover:border-cyan-500 rounded-full text-white font-bold text-sm uppercase tracking-widest transition-all">
