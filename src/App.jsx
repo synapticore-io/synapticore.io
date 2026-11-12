@@ -241,7 +241,7 @@ const App = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-12">
-            <a href="#research" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Forschung</a>
+            <a href="#research" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Leistungen</a>
             <a href="#projects" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Projekte</a>
             <a href="#contact" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">Kontakt</a>
             <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 hover:text-cyan-400 transition-all uppercase tracking-[0.2em]">GitHub</a>
@@ -254,7 +254,7 @@ const App = () => {
         {isMenuOpen && (
           <div className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-white/5 mt-2">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              <a href="#research" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">Forschung</a>
+              <a href="#research" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">Leistungen</a>
               <a href="#projects" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 py-2">Projekte</a>
               <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">Kontakt</a>
               <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition-colors py-2">GitHub</a>
@@ -281,58 +281,13 @@ const App = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 sm:gap-8">
-                <a href="#research" className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-400 transition-all uppercase tracking-widest text-xs flex items-center gap-3">
+                <a href="#contact" className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-slate-950 font-black rounded-2xl hover:bg-cyan-400 transition-all uppercase tracking-widest text-xs flex items-center gap-3">
                   {heroData.cta_text} <ChevronRight size={18} />
                 </a>
                 <a href="https://github.com/synapticore-io" target="_blank" rel="noopener noreferrer" className="px-6 py-4 sm:px-12 sm:py-6 bg-white/5 backdrop-blur-md border border-white/10 text-white font-black rounded-2xl hover:border-cyan-500 transition-all uppercase tracking-widest text-xs no-underline">
                   GitHub
                 </a>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="research" className="py-16 md:py-32 relative">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {modes.map((mode) => (
-                <div
-                  key={mode.id}
-                  className={`relative p-6 sm:p-12 rounded-2xl sm:rounded-[2.5rem] border transition-all duration-700 overflow-hidden group ${activeMode === mode.id ? 'border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_40px_rgba(6,182,212,0.1)]' : 'border-white/5 bg-white/5 hover:border-white/20'}`}
-                >
-                  <div className={`absolute top-0 right-0 p-8 transition-all duration-700 opacity-20 ${activeMode === mode.id ? 'scale-150 opacity-100 rotate-12 text-cyan-400' : ''}`}>
-                    {mode.icon}
-                  </div>
-
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 ${activeMode === mode.id ? 'bg-cyan-500 text-slate-950' : 'bg-white/5 text-slate-400'}`}>
-                    {mode.icon}
-                  </div>
-
-                  <h3 className="text-2xl font-black uppercase tracking-tighter mb-4">{mode.title}</h3>
-                  <p className="text-slate-500 leading-relaxed font-light">{mode.desc}</p>
-
-                  <div className={`mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all ${activeMode === mode.id ? 'text-cyan-400 opacity-100' : 'opacity-0'}`}>
-                    Forschungsfeld <Activity size={12} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="projects" className="py-16 md:py-32 relative border-t border-white/5">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ausgewählte Projekte</p>
-            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Forschung in <span className="text-cyan-400">Code.</span></h2>
-            <p className="text-slate-400 text-lg max-w-2xl mb-12">Vier Projekte zeigen, wie aus wissenschaftlichen Daten, Modellen und Fragen konkrete Werkzeuge werden.</p>
-            <div className="grid md:grid-cols-2 gap-5">
-              {projects.map((project) => (
-                <a key={project.name} href={project.url} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:p-9 hover:border-cyan-500/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400">
-                  <span className="text-xs text-cyan-400 font-mono uppercase tracking-wider">{project.category} · Open Source</span>
-                  <h3 className="text-2xl sm:text-3xl font-bold mt-4 mb-3 flex items-center gap-3">{project.name}<ExternalLink size={17} className="text-slate-500 group-hover:text-cyan-400" /></h3>
-                  <p className="text-slate-400 leading-relaxed">{project.description}</p>
-                </a>
-              ))}
             </div>
           </div>
         </section>
@@ -346,14 +301,12 @@ const App = () => {
                 <p className="text-slate-400 text-lg lg:text-xl font-light leading-relaxed mb-12">
                   {statsData.description}
                 </p>
-                <div className="grid grid-cols-2 gap-6 md:gap-12">
-                  {statsData.metadata.metrics.map((metric, i) => (
-                    <div key={i}>
-                      <div className="text-3xl font-black mb-1 tracking-tighter italic">{metric.value}</div>
-                      <div className="text-[9px] uppercase font-bold text-slate-500 tracking-[0.2em]">{metric.label}</div>
-                    </div>
-                  ))}
-                </div>
+                <ol className="space-y-5 text-slate-400 leading-relaxed">
+                  <li><strong className="text-white">01 · Verstehen:</strong> Fragestellung, Daten und Anforderungen klären.</li>
+                  <li><strong className="text-white">02 · Entwickeln:</strong> Datenpipeline und Modell oder Prototyp aufbauen.</li>
+                  <li><strong className="text-white">03 · Prüfen:</strong> Ergebnisse gegen vereinbarte Kriterien evaluieren und Grenzen dokumentieren.</li>
+                  <li><strong className="text-white">04 · Einsetzen:</strong> Den Prototyp für den vorgesehenen Betrieb weiterentwickeln und übergeben.</li>
+                </ol>
                 <a
                   href="https://github.com/orgs/synapticore-io/repositories?q=mirror%3Afalse+fork%3Afalse+archived%3Afalse"
                   target="_blank"
@@ -382,12 +335,60 @@ const App = () => {
           </div>
         </section>
 
+        <section id="research" className="py-16 md:py-32 relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Meine Leistungen</p>
+            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Was Ihr Vorhaben <span className="text-cyan-400">weiterbringt.</span></h2>
+            <p className="text-slate-400 text-lg max-w-3xl mb-12">Für Forschungsgruppen, Entwicklungsabteilungen und Unternehmen: vom ersten Datensatz bis zur Weiterentwicklung eines Prototyps für den Einsatz.</p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {modes.map((mode) => (
+                <div
+                  key={mode.id}
+                  className={`relative p-6 sm:p-12 rounded-2xl sm:rounded-[2.5rem] border transition-all duration-700 overflow-hidden group ${activeMode === mode.id ? 'border-cyan-500/50 bg-cyan-500/10 shadow-[0_0_40px_rgba(6,182,212,0.1)]' : 'border-white/5 bg-white/5 hover:border-white/20'}`}
+                >
+                  <div className={`absolute top-0 right-0 p-8 transition-all duration-700 opacity-20 ${activeMode === mode.id ? 'scale-150 opacity-100 rotate-12 text-cyan-400' : ''}`}>
+                    {mode.icon}
+                  </div>
+
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 ${activeMode === mode.id ? 'bg-cyan-500 text-slate-950' : 'bg-white/5 text-slate-400'}`}>
+                    {mode.icon}
+                  </div>
+
+                  <h3 className="text-2xl font-black uppercase tracking-tighter mb-4">{mode.title}</h3>
+                  <p className="text-slate-500 leading-relaxed font-light">{mode.desc}</p>
+
+                  <div className={`mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all ${activeMode === mode.id ? 'text-cyan-400 opacity-100' : 'opacity-0'}`}>
+                    Research Engineering <Activity size={12} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" className="py-16 md:py-32 relative border-t border-white/5">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ausgewählte Projekte</p>
+            <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-5">Forschung in <span className="text-cyan-400">Code.</span></h2>
+            <p className="text-slate-400 text-lg max-w-2xl mb-12">Vier Projekte zeigen, wie aus wissenschaftlichen Daten, Modellen und Fragen konkrete Werkzeuge werden.</p>
+            <div className="grid md:grid-cols-2 gap-5">
+              {projects.map((project) => (
+                <a key={project.name} href={project.url} target="_blank" rel="noopener noreferrer" className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:p-9 hover:border-cyan-500/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400">
+                  <span className="text-xs text-cyan-400 font-mono uppercase tracking-wider">{project.category} · Open Source</span>
+                  <h3 className="text-2xl sm:text-3xl font-bold mt-4 mb-3 flex items-center gap-3">{project.name}<ExternalLink size={17} className="text-slate-500 group-hover:text-cyan-400" /></h3>
+                  <p className="text-slate-400 leading-relaxed">{project.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="py-16 md:py-32 relative border-t border-white/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-24">
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Über mich</p>
               <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Vom Bild zum <span className="text-cyan-400">Modell.</span></h2>
-              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge. Seit über 20 Jahren beschäftige ich mich mit 3D, Visualisierung und räumlichen Systemen – unter anderem im Umfeld industrieller Forschung und Entwicklung. Aus physikbasiertem Rendering und virtuellen Materialien wurde die Frage, wie sich Daten und Modelle für Forschung und Fertigung nutzbar machen lassen.</p>
+              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge. Seit über 20 Jahren beschäftige ich mich mit 3D, Visualisierung und räumlichen Systemen – unter anderem im Umfeld industrieller Forschung und Entwicklung. Ich habe mit virtuellen Materialien und physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Heute nutze ich diese Erfahrung, um Daten und Modelle für Forschung und Fertigung nutzbar zu machen.</p>
             </div>
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ein Ökosystem</p>
@@ -404,10 +405,10 @@ const App = () => {
         <section id="contact" className="py-16 md:py-32 relative">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">
-              Get in <span className="text-cyan-400">Touch.</span>
+              Lassen Sie uns <span className="text-cyan-400">sprechen.</span>
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto font-light">
-              Sie arbeiten an einer Forschungsfrage und suchen Unterstützung bei Daten, Modellen oder der Umsetzung? Schreiben Sie mir.
+              Sie haben einen Prototyp, Messdaten oder eine Forschungsfrage und suchen Unterstützung für den nächsten Schritt? Schreiben Sie mir, worum es geht.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               <a href="mailto:hello@synapticore.io" className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 hover:border-cyan-500 rounded-full text-white font-bold text-sm uppercase tracking-widest transition-all">

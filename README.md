@@ -19,7 +19,7 @@ npm run build    # Production build → dist/
 npm run preview  # Preview build on port 4173
 ```
 
-Hero-Texte werden im CMS in `hero_sections`, Forschungsfelder und Arbeitsweise in `content_blocks` gepflegt. Export: `uv run cms export --site synapticore-io` im CMS-Verzeichnis. Die Projektauswahl sowie Über-mich- und Ökosystemtexte stehen in `src/App.jsx`.
+Hero-Texte werden im CMS in `hero_sections`, Forschungsfelder und Arbeitsweise in `content_blocks` gepflegt. Export: `uv run cms export --site synapticore-io` im CMS-Verzeichnis. Die Darstellung des Arbeitsablaufs, die Projektauswahl sowie Über-mich- und Ökosystemtexte stehen in `src/App.jsx`.
 
 ## License
 
