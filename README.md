@@ -23,7 +23,7 @@ Hero-Texte werden im CMS in `hero_sections`, Forschungsfelder und Arbeitsweise i
 
 ## Offen
 
-- Umsatzsteuer-ID beim Finanzamt auf Gültigkeit und Zuordnung prüfen; erst nach Klärung im Impressum ergänzen.
+- Die bisherige Umsatzsteuer-ID kann laut Auskunft des Finanzamts reaktiviert werden; Abschluss und Gültigkeit der Reaktivierung noch bestätigen.
 
 ## License
 
