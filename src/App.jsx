@@ -304,7 +304,7 @@ const App = () => {
                 <FlaskConical size={14} /> Research Engineering
               </div>
 
-              <h1 className="text-4xl sm:text-6xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] mb-8 sm:mb-12 uppercase italic">
+              <h1 className="text-[clamp(2rem,7.6vw,6rem)] font-extrabold tracking-tighter leading-[0.95] mb-8 sm:mb-12 uppercase italic">
                 {hero.title.split('\n')[0]} <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">{hero.title.split('\n')[1]}</span>
               </h1>
@@ -330,7 +330,7 @@ const App = () => {
             <div className="flex flex-col lg:flex-row gap-12 md:gap-24 items-center">
               <div className="lg:w-1/2">
                 <div className="text-[10px] font-black text-cyan-500 uppercase tracking-[0.5em] mb-8">{stats.title}</div>
-                <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-10 leading-none">{stats.metadata.heading.split(' ').slice(0, -1).join(' ')} <br /><span className="text-cyan-400">{stats.metadata.heading.split(' ').slice(-1)[0]}</span></h2>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-tighter mb-10 leading-tight [overflow-wrap:anywhere]">{stats.metadata.heading.split(' ').slice(0, -1).join(' ')} <br /><span className="text-cyan-400">{stats.metadata.heading.split(' ').slice(-1)[0]}</span></h2>
                 <p className="text-slate-400 text-lg lg:text-xl font-light leading-relaxed mb-12">
                   {stats.description}
                 </p>
@@ -418,9 +418,9 @@ const App = () => {
 
         <section id="about" className="py-16 md:py-32 relative border-t border-white/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-24">
-            <div>
+            <div className="min-w-0">
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">{isEnglish ? 'About me' : 'Über mich'}</p>
-              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">{isEnglish ? 'See connections. ' : 'Zusammenhänge erkennen. '}<span className="text-cyan-400">{isEnglish ? 'Build systems.' : 'Systeme entwickeln.'}</span></h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-[clamp(1.8rem,2.5vw,2.75rem)] font-bold uppercase tracking-tighter leading-tight mb-8 [overflow-wrap:anywhere]">{isEnglish ? 'See connections. ' : 'Zusammenhänge erkennen. '}<span className="text-cyan-400">{isEnglish ? 'Build systems.' : 'Systeme entwickeln.'}</span></h2>
               <div className="space-y-5 text-slate-400 text-lg leading-relaxed">
                 <p>{isEnglish ? 'I am Björn Bethge, an independent developer and research engineer. I explore technical questions in depth, connect different disciplines and turn those insights into software, tools and prototypes.' : 'Ich bin Björn Bethge, unabhängiger Entwickler und Research Engineer. Ich arbeite mich tief in technische Fragestellungen ein, erkenne Verbindungen zwischen unterschiedlichen Bereichen und entwickle daraus Software, Werkzeuge und Prototypen.'}</p>
                 <p>{isEnglish ? 'My background includes virtual validation, visualisation and interactive systems at the intersection of research, development and design. I have worked with physically based rendering, built GPU clusters and introduced laboratory technology to specialist teams. Through augmented reality, I first encountered computer vision and machine learning around 2014.' : 'Mein Hintergrund liegt in virtueller Absicherung, Visualisierung und interaktiven Systemen an der Schnittstelle von Forschung, Entwicklung und Design. Ich habe mit physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Über Augmented Reality kam ich um 2014 erstmals mit Computer Vision und Machine Learning in Kontakt.'}</p>

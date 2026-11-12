@@ -14,6 +14,8 @@
 
 ## Development
 
+Die Hero-Überschrift skaliert mit der Bildschirmbreite und bleibt in der Inhaltsbreite.
+
 Der GitHub-Pages-Build benötigt das Repository-Secret `CMS_DEPLOY_KEY`: einen privaten SSH-Deploy-Key mit ausschließlich lesendem Zugriff auf `agentic-dev-io/cms`.
 
 ```bash
