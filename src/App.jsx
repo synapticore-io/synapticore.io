@@ -383,20 +383,24 @@ const App = () => {
           </div>
         </section>
 
-        <section className="py-16 md:py-32 relative border-t border-white/5">
+        <section id="about" className="py-16 md:py-32 relative border-t border-white/5">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-24">
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Über mich</p>
-              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Vom Bild zum <span className="text-cyan-400">Modell.</span></h2>
-              <p className="text-slate-400 text-lg leading-relaxed">Ich bin Björn Bethge, Founder &amp; Research Engineer bei synapticore.io. Seit über 20 Jahren beschäftige ich mich mit 3D, Visualisierung und räumlichen Systemen – unter anderem im Umfeld industrieller Forschung und Entwicklung. Ich habe mit virtuellen Materialien und physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Über Augmented Reality kam ich um 2014 erstmals mit Computer Vision und Machine Learning in Kontakt. Heute nutze ich diese Erfahrung, um Daten und Modelle für Forschung und Fertigung nutzbar zu machen.</p>
+              <h2 className="text-4xl lg:text-6xl font-black uppercase tracking-tighter mb-8">Zusammenhänge erkennen. <span className="text-cyan-400">Systeme entwickeln.</span></h2>
+              <div className="space-y-5 text-slate-400 text-lg leading-relaxed">
+                <p>Ich bin Björn Bethge, unabhängiger Entwickler und Research Engineer. Ich arbeite mich tief in technische Fragestellungen ein, erkenne Verbindungen zwischen unterschiedlichen Bereichen und entwickle daraus Software, Werkzeuge und Prototypen.</p>
+                <p>Mein Hintergrund liegt in virtueller Absicherung, Visualisierung und interaktiven Systemen an der Schnittstelle von Forschung, Entwicklung und Design. Ich habe mit physikbasiertem Rendering gearbeitet, GPU-Cluster aufgebaut und Labortechnik in Fachabteilungen eingeführt. Über Augmented Reality kam ich um 2014 erstmals mit Computer Vision und Machine Learning in Kontakt.</p>
+                <p>Heute verbinde ich diese Erfahrung mit AI, wissenschaftlichem Computing und Software Engineering. Mich interessiert besonders, wie Daten, Geometrie, Bewegung und Simulation in intelligenten Systemen zusammenkommen. In dieser Richtung entwickle ich eigene Ansätze und Prototypen und möchte meine Arbeit zu Spatial und Embodied AI weiter vertiefen.</p>
+              </div>
             </div>
             <div>
               <p className="text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] mb-6">Ein Ökosystem</p>
               <h3 className="text-2xl font-bold mb-5">Drei Perspektiven, verbunden.</h3>
               <div className="space-y-5 text-slate-400 leading-relaxed">
                 <p><strong className="text-white">synapticore.io</strong> · Research Engineering und räumliche Intelligenz.</p>
-                <p><a href="https://agentic-dev.io/" className="text-white underline decoration-cyan-500 underline-offset-4">agentic-dev.io</a> · Agentensysteme und AI Development.</p>
-                <p><a href="https://synapticore.studio/" className="text-white underline decoration-cyan-500 underline-offset-4">synapticore.studio</a> · Echtzeit-3D und interaktive Erlebnisse.</p>
+                <p><a href="https://agentic-dev.io/" className="text-white underline decoration-cyan-500 underline-offset-4">agentic-dev.io</a> · Consulting, Engineering und Education für Agentensysteme.</p>
+                <p><a href="https://synapticore.studio/" className="text-white underline decoration-cyan-500 underline-offset-4">synapticore.studio</a> · DCC-Pipelines und interaktive räumliche Anwendungen.</p>
               </div>
             </div>
           </div>
